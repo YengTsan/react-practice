@@ -4,8 +4,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import SearchBar from './components/search_bar';
+
 // set the unchange API key
+import YTSearch from 'youtube-api-search'
 const API_KEY = 'AIzaSyBJODiOD_9Jab6-mezCwKdNAs6yeterX8I'
+
+YTSearch({key: API_KEY, term: 'surboards'}, (data) => {
+  console.log(data)
+})
 
 // Create a new component. This component should produce some HTML
 
