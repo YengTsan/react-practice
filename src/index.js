@@ -4,8 +4,9 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import SearchBar from './components/search_bar';
-import VideoList from './components/video_list'
-import VideoDetail from './components/video_detail'
+import VideoList from './components/video_list';
+import VideoDetail from './components/video_detail';
+import _ from 'lodash';
 
 // set the unchange API key
 import YTSearch from 'youtube-api-search'
@@ -23,12 +24,7 @@ class App extends Component {
       selectedVideo: null
     };
 
-    YTSearch({key: API_KEY, term: 'rails'}, (videos) => {
-      this.setState({
-        videos: videos,
-        selectedVideo: videos[0]
-      })
-    })
+    this.search('rails');
   }
 
   search(term) {
@@ -41,9 +37,11 @@ class App extends Component {
   }
 
   render() {
+    const videoSearch = _.debounce(this.search, 300)
+
     return (
       <div>
-        <SearchBar onVideoSearch= { this.search }/>
+        <SearchBar onVideoSearch= { videoSearch }/>
         <VideoDetail video= {this.state.selectedVideo}/>
         <VideoList
           onVideoSelect={ selectedVideo => this.setState({selectedVideo}) }
