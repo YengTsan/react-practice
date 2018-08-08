@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import SearchBar from './components/search_bar';
+import VideoList from './components/video_list'
 
 // set the unchange API key
 import YTSearch from 'youtube-api-search'
@@ -26,6 +27,7 @@ class App extends Component {
     return (
       <div>
         <SearchBar />
+        <VideoList videos={this.state.videos}/>
       </div>
     )
   }
